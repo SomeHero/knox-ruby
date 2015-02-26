@@ -75,7 +75,6 @@ module Knox
 
       url = base_url + "/securityanswer"
 
-      binding.pry
       response = RestClient.post(url, {
         "answer_1" => answer1,
         "answer_2" => answer2,
@@ -89,7 +88,6 @@ module Knox
           when 201
             response
           else
-            binding.pry
             response.return!(request, result, &block)
           end
       }

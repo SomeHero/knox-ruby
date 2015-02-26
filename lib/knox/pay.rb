@@ -19,7 +19,6 @@ module Knox
 
       url = base_url + "/pay"
 
-      binding.pry
       response = RestClient.post(url, {
         "total" => total,
         "debit_pin" => debit_api_key,
@@ -37,7 +36,6 @@ module Knox
           end
       }
 
-      binding.pry
       @parsed_response = Hash.new
       @parsed_response[:code] = response.code
 

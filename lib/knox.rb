@@ -3,6 +3,7 @@ require 'knox/account'
 require 'knox/banks'
 require 'knox/session'
 require 'knox/pay'
+require 'knox/transactions'
 require 'rest_client'
 
 module Knox
@@ -25,7 +26,7 @@ module Knox
     def transactions
       @transactions = Knox::Transactions.new
     end
-    
+
     # Defined for generic calls without access_tokens required. Ex: Plaid.call.add_accounts(username,password,type)
     def session
       @session = Knox::Session.new

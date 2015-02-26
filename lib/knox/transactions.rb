@@ -19,7 +19,6 @@ module Knox
 
       url = base_url + "/transactions"
 
-      binding.pry
       response = RestClient.get(url, {
         :'authorization' => session_token,
         :'from_date' => from_date,
@@ -35,7 +34,6 @@ module Knox
           end
       }
 
-      binding.pry
       @parsed_response = Hash.new
       @parsed_response[:code] = response.code
 
