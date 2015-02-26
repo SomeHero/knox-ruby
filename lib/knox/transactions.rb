@@ -4,7 +4,7 @@ require 'digest/sha1'
 module Knox
   # This is used when a customer needs to be defined by the plaid access token.
   # Abstracting as a class makes it easier since we wont have to redefine the access_token over and over.
-  class Pay
+  class Transactions
 
     # This initializes our instance variables, and sets up a new Customer class.
     def initialize
@@ -13,19 +13,17 @@ module Knox
       end
     end
 
-    def create session_token, total, debit_api_key, credit_api_key
+    def get session_token, from_date, to_date
 
       base_url = self.instance_variable_get(:'@base_url')
 
-      url = base_url + "/pay"
+      url = base_url + "/transactions"
 
       binding.pry
-      response = RestClient.post(url, {
-        "total" => total,
-        "debit_pin" => debit_api_key,
-        "credit_pin" => credit_api_key
-      }, {
-          :'authorization' => session_token
+      response = RestClient.get(url, {
+        :'authorization' => session_token,
+        :'from_date' => from_date,
+        :'to_date' => to_date
       }){ |response, request, result, &block|
           case response.code
           when 200

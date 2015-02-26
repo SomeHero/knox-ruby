@@ -21,6 +21,11 @@ module Knox
     def pay
       @pay = Knox::Pay.new
     end
+
+    def transactions
+      @transactions = Knox::Transactions.new
+    end
+    
     # Defined for generic calls without access_tokens required. Ex: Plaid.call.add_accounts(username,password,type)
     def session
       @session = Knox::Session.new
