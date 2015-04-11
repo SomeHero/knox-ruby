@@ -15,10 +15,17 @@ module Knox
         base_url = self.instance_variable_get(:'@base_url')
 
         url = base_url + "/accounts?account_pin=" + account_pin
-        response = RestClient.get(url,
+
+        resource = RestClient::Resource.new(
+  url,
+  :timeout => nil,
+  :open_timeout => nil)
+
+        response = resource.get(
           {
               :'authorization' => session_token
           }){ |response, request, result, &block|
+            
             case response.code
             when 200
               response
@@ -76,9 +83,7 @@ module Knox
       url = base_url + "/securityanswer"
 
       response = RestClient.post(url, {
-        "answer_1" => answer1,
-        "answer_2" => answer2,
-        "store" => store
+        "answer_1" => answer1
       }, {
           :'authorization' => session_token
       }){ |response, request, result, &block|
